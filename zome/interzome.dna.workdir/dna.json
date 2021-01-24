@@ -1,0 +1,13 @@
+{
+  "name": "interzome",
+  "uuid": "",
+  "properties": null,
+  "zomes": {
+    "zomeA": {
+      "wasm_path": "../target/wasm32-unknown-unknown/release/zomeA.wasm"
+    },
+    "zomeB": {
+      "wasm_path": "../target/wasm32-unknown-unknown/release/zomeB.wasm"
+    }
+  }
+}

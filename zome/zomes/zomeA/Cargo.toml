@@ -1,0 +1,16 @@
+[package]
+authors = ["nphias@gmail.com"]
+edition = "2018"
+name = "zomeA"
+version = "0.0.1"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+name = "zomeA"
+
+[dependencies]
+derive_more = "0"
+serde = "1"
+
+hc_utils = "0"
+hdk3 = "0"
