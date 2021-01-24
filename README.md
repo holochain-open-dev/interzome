@@ -19,8 +19,8 @@ none
 the demo uses the following revisions:
 
 hc_utils = {git = "https://github.com/holochain/hc-utils", branch = "develop", package = "hc_utils"}
-hdk3 = {git = "https://github.com/holochain/holochain", rev = "7037aa2ccfb1ad9a8ece98eb379686f605dc1a0c", package = "hdk3"}
-holo_hash = {git = "https://github.com/holochain/holochain", rev = "7037aa2ccfb1ad9a8ece98eb379686f605dc1a0c", package = "holo_hash"}
+hdk3 = {git = "https://github.com/holochain/holochain", rev = "3675b58", package = "hdk3"}
+holo_hash = {git = "https://github.com/holochain/holochain", rev = "3675b58", package = "holo_hash"}
 ```
 
 
