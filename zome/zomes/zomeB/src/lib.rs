@@ -25,6 +25,7 @@ pub fn set_username(
 #[derive(Deserialize, Serialize, SerializedBytes, Clone, Debug)]
 pub struct UsernameWrapper(pub String);
 
+#[hdk_extern]
 pub fn get_agent_pubkey_from_username(
     username: UsernameWrapper,
 ) -> ExternResult<AgentPubKey> {

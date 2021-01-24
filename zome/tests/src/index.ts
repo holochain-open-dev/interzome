@@ -31,7 +31,7 @@ const installation: InstallAgentsHapps = [
 ];
 
 orchestrator.registerScenario(
-  "create and user",
+  "create a user and find agent key by username from another zome",
   async (s, t) => {
     const [player]: Player[] = await s.players([conductorConfig]);
     const [[alice_happ], [bob_happ]] = await player.installAgentsHapps(
@@ -45,17 +45,17 @@ orchestrator.registerScenario(
       "zomeA",
       "set_username",
       {
-       username: "Thomas"
+       user: "Thomas"
       }
     );
     t.ok(agent_data);
 
-    await sleep(10);
+    await sleep(200);
 
     let pubkey = await alice_.call(
       "zomeB",
       "get_agent_pubkey_from_username",
-      {username: "Thomas"}
+      "Thomas"
     );
     t.equal(pubkey.length, 1);
 
