@@ -1,5 +1,5 @@
 use hdk3::prelude::*;
-use hc_utils::WrappedEntryHash;
+use user::{User};
 
 mod user;
 mod utils;

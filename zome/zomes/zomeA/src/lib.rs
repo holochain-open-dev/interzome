@@ -1,5 +1,6 @@
 use hdk3::prelude::*;
-use hc_utils::WrappedEntryHash;
+
+use user::{User, UserEntry};
 
 mod user;
 mod utils;
@@ -26,11 +27,11 @@ pub fn set_username(
 pub struct UsernameWrapper(pub String);
 
 pub fn get_agent_pubkey_from_username(username_input: UsernameWrapper) -> ExternResult<AgentPubKey> {
-    let agent_info = agent_info()?;
-    Ok(agent_info.agent_initial_pubkey)  
+    //let agent_info = agent_info()?;
+    //Ok(agent_info.agent_initial_pubkey)  
     
-    /* //get entry by its entry hash instead of links
-    let username_entry = UsernameEntry { username: username_input.0 };
+     //get entry by its entry hash instead of links
+    let username_entry = UserEntry { username: username_input.0 };
     let username_hash = hash_entry(&username_entry)?;
     let option = GetOptions::latest();
     match get(username_hash, option)? {
@@ -38,6 +39,6 @@ pub fn get_agent_pubkey_from_username(username_input: UsernameWrapper) -> Extern
             let header_details = el.header();
             Ok(header_details.author().to_owned())
         },
-        None => crate::error("The username does not exist")
-    } */
+        None => Err(err("The username does not exist"))
+    } 
 }

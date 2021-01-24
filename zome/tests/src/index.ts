@@ -10,7 +10,7 @@ import path from "path";
 const conductorConfig = Config.gen({});
 
 // Construct proper paths for your DNAs
-const calendarEvents = path.join(__dirname, "../../todo_rename_zome.dna.gz");
+const interzome = path.join(__dirname, "../../interzome.dna.gz");
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(() => resolve(), ms));
 
@@ -22,51 +22,42 @@ const installation: InstallAgentsHapps = [
   // agent 0
   [
     // happ 0
-    [calendarEvents],
+    [interzome],
   ],
   [
     // happ 0
-    [calendarEvents],
+    [interzome],
   ],
 ];
 
-const dateToTimestamp = (date) => [
-  Math.floor(date / 1000),
-  (date % 1000) * 1000,
-];
-
 orchestrator.registerScenario(
-  "create and get a calendar event",
+  "create and user",
   async (s, t) => {
     const [player]: Player[] = await s.players([conductorConfig]);
     const [[alice_happ], [bob_happ]] = await player.installAgentsHapps(
       installation
     );
 
-    const alice_calendar = alice_happ.cells[0];
-    const bob_calendar = bob_happ.cells[0];
+    const alice_ = alice_happ.cells[0];
+    const bob_ = bob_happ.cells[0];
 
-    let calendarEvent = await alice_calendar.call(
-      "todo_rename_zome",
-      "create_calendar_event",
+    let agent_data = await alice_.call(
+      "zomeA",
+      "set_username",
       {
-        title: "Event 1",
-        start_time: [Math.floor(Date.now() / 1000), 0],
-        end_time: [Math.floor(Date.now() / 1000) + 1000, 0],
-        location: { Custom: "hiii" },
-        invitees: [],
+       username: "Thomas"
       }
     );
-    t.ok(calendarEvent);
+    t.ok(agent_data);
 
     await sleep(10);
 
-    let calendarEvents = await alice_calendar.call(
-      "todo_rename_zome",
-      "get_all_calendar_events",
-      null
+    let pubkey = await alice_.call(
+      "zomeB",
+      "get_agent_pubkey_from_username",
+      {username: "Thomas"}
     );
-    t.equal(calendarEvents.length, 1);
+    t.equal(pubkey.length, 1);
 
   }
 );

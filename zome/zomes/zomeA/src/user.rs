@@ -6,7 +6,6 @@ use hc_utils::WrappedAgentPubKey;
 #[derive(Clone)]
 pub struct UserEntry {
     pub username: String,
-    pub user_pub_key: AgentPubKey,
 }
 
 #[derive(Clone, Serialize, Deserialize, SerializedBytes)]
@@ -24,14 +23,14 @@ pub fn set_username(userdata: UserData
 ) -> ExternResult<User> {
     let agent_info = agent_info()?;
 
-    let userEntry = UserEntry {
-        username: userdata.username,
-        user_pub_key: agent_info.latest_pub_key
+    let user_entry = UserEntry {
+        username: userdata.user.clone()
     };
-    create_entry(&userEntry)?;
+    
+    create_entry(&user_entry)?;
     let user = User {
-        username: userdata.username,
-        user_pub_key: WrappedAgentPubKey(userEntry.user_pub_key.clone())
+        username: userdata.user,
+        user_pub_key: WrappedAgentPubKey(agent_info.agent_latest_pubkey)
     };
     Ok(user)
 }
