@@ -3,7 +3,6 @@ use hdk3::prelude::*;
 use user::{User, UserEntry};
 
 mod user;
-mod utils;
 
 pub fn err(reason: &str) -> HdkError {
     HdkError::Wasm(WasmError::Zome(String::from(reason)))
@@ -26,6 +25,8 @@ pub fn set_username(
 #[derive(Deserialize, Serialize, SerializedBytes, Clone, Debug)]
 pub struct UsernameWrapper(pub String);
 
+
+#[hdk_extern]
 pub fn get_agent_pubkey_from_username(username_input: UsernameWrapper) -> ExternResult<AgentPubKey> {
     //let agent_info = agent_info()?;
     //Ok(agent_info.agent_initial_pubkey)  

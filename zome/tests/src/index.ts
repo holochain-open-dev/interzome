@@ -45,9 +45,10 @@ orchestrator.registerScenario(
       "zomeA",
       "set_username",
       {
-       user: "Thomas"
+       user: "Alice"
       }
     );
+    console.log(agent_data)
     t.ok(agent_data);
 
     await sleep(200);
@@ -55,10 +56,9 @@ orchestrator.registerScenario(
     let pubkey = await alice_.call(
       "zomeB",
       "get_agent_pubkey_from_username",
-      "Thomas"
+      "Alice"
     );
-    t.equal(pubkey.length, 1);
-
+    t.equal(pubkey,agent_data.user_pub_key);
   }
 );
 

@@ -1,4 +1,4 @@
-use crate::utils;
+//use crate::utils;
 use hdk3::prelude::*;
 use hc_utils::WrappedAgentPubKey;
 
@@ -26,7 +26,7 @@ pub fn set_username(userdata: UserData
     let user_entry = UserEntry {
         username: userdata.user.clone()
     };
-    
+
     create_entry(&user_entry)?;
     let user = User {
         username: userdata.user,

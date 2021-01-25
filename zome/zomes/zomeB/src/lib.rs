@@ -1,8 +1,8 @@
+use hc_utils::WrappedAgentPubKey;
 use hdk3::prelude::*;
 use user::{User};
 
 mod user;
-mod utils;
 
 pub fn err(reason: &str) -> HdkError {
     HdkError::Wasm(WasmError::Zome(String::from(reason)))
@@ -28,12 +28,12 @@ pub struct UsernameWrapper(pub String);
 #[hdk_extern]
 pub fn get_agent_pubkey_from_username(
     username: UsernameWrapper,
-) -> ExternResult<AgentPubKey> {
+) -> ExternResult<WrappedAgentPubKey> {
     let function_name = zome::FunctionName("get_agent_pubkey_from_username".to_owned());
     // needs to handle error from get_agent_pubkey_from_username in UI
     let agent_pubkey = hdk3::prelude::call(
         None,
-        "zomeA".into(),
+        "zome_a".into(),
         function_name,
         None,
         &username
@@ -43,7 +43,7 @@ pub fn get_agent_pubkey_from_username(
         Err(e) => {
             panic!("Unable to make interzome call: {:?}", e);
         }
-        Ok(_) => {Ok(agent_pubkey?)}
+        Ok(_) => {Ok(WrappedAgentPubKey(agent_pubkey?))}
     }
    // Ok(agent_pubkey)
 }

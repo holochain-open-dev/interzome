@@ -1,12 +1,12 @@
 [package]
 authors = ["nphias@gmail.com"]
 edition = "2018"
-name = "zomeB"
+name = "zome_b"
 version = "0.0.1"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
-name = "zomeB"
+name = "zome_b"
 
 [dependencies]
 derive_more = "0"
