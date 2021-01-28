@@ -6,7 +6,7 @@ This module is designed to be help people do basic things. It is packaged as two
 
 ## Documentation
 
-this is it!
+IMPORTANT: make sure your serialized_input struct and your serialized_output struct are identical both in structure and name in both zomes.  Otherwise you will get back an unknown wasm error  
 
 ## Assumptions
 

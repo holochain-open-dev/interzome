@@ -12,7 +12,7 @@ const conductorConfig = Config.gen({});
 // Construct proper paths for your DNAs
 const interzome = path.join(__dirname, "../../interzome.dna.gz");
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(() => resolve(), ms));
+const sleep = (ms) => new Promise((resolve) => setTimeout(() => resolve(null), ms));
 
 const orchestrator = new Orchestrator();
 
@@ -31,15 +31,14 @@ const installation: InstallAgentsHapps = [
 ];
 
 orchestrator.registerScenario(
-  "create a user and find agent key by username from another zome",
+  "create a user entry and find agent_key by username from another zome",
   async (s, t) => {
     const [player]: Player[] = await s.players([conductorConfig]);
-    const [[alice_happ], [bob_happ]] = await player.installAgentsHapps(
+    const [[alice_happ]] = await player.installAgentsHapps(
       installation
     );
 
     const alice_ = alice_happ.cells[0];
-    const bob_ = bob_happ.cells[0];
 
     let agent_data = await alice_.call(
       "zomeA",
